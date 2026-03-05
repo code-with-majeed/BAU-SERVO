@@ -73,7 +73,7 @@ const Cards = ({ t }) => {
           <img
             src={img1}
             alt="Relief"
-            className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover rounded-xl shadow-lg"
+            className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover object-top rounded-xl shadow-lg"
           />
         </motion.div>
 
@@ -131,7 +131,7 @@ const Cards = ({ t }) => {
           <img
             src={img2}
             alt="Relief"
-            className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover rounded-xl shadow-lg"
+            className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover object-top rounded-xl shadow-lg"
           />
         </motion.div>
       </motion.div>
