@@ -80,9 +80,11 @@ const Nav = ({ language, setLanguage, t }) => {
             <li
               key={item}
               onClick={() => handleNavClick(item)}
-              className="px-3 py-2 text-sm font-medium text-gray-200 hover:text-white font-bold rounded-lg hover:bg-[#1a1a1a] transition-all duration-200 cursor-pointer"
+              className="relative px-3 py-2 text-sm font-medium text-gray-200 hover:text-white font-bold rounded-lg transition-all duration-200 cursor-pointer group"
             >
               {t[item]}
+              {/* Underline animation */}
+              <span className="absolute left-0 bottom-1 w-full h-0.5 bg-[#F97316] transform scale-x-0 origin-center transition-transform duration-200 group-hover:scale-x-80 rounded-full" />
             </li>
           ))}
         </ul>
@@ -159,9 +161,11 @@ const Nav = ({ language, setLanguage, t }) => {
               <li
                 key={item}
                 onClick={() => handleNavClick(item)}
-                className="px-4 py-3 text-base font-medium text-gray-200 hover:text-white rounded-xl hover:bg-white/10 transition-all cursor-pointer"
+                className="relative px-4 py-3 text-base font-medium text-gray-200 hover:text-white rounded-xl transition-all cursor-pointer group"
               >
                 {t[item]}
+                {/* Underline animation */}
+                <span className="absolute left-0 bottom-0 w-full h-0.5 bg-[#F97316] transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 rounded-full" />
               </li>
             ))}
           </ul>
