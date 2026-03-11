@@ -1,4 +1,4 @@
-// Hero.jsx (unchanged, already uses t)
+// Hero.jsx
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { GiCrane, GiDrill, GiBrickWall } from "react-icons/gi";
@@ -225,29 +225,28 @@ const Hero = ({ language, t }) => {
 
           <ContactForm t={t} />
 
+          {/* Responsive Buttons */}
           <motion.div
-            className="flex justify-center"
+            className="flex flex-wrap justify-center gap-2 sm:gap-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <div className="flex gap-x-4">
-              <motion.button
-                className="bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-2 py-2 sm:px-6 sm:py-3 rounded-lg transition shadow-lg cursor-pointer"
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.5)" }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {t.bottom_button}
-              </motion.button>
-              <motion.button
-                className="bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-4 py-3 sm:px-6 sm:py-3 rounded-lg transition shadow-lg cursor-pointer"
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.5)" }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {t.bottom_button2}
-              </motion.button>
-            </div>
+            <motion.button
+              className="bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-3 py-2 text-xs sm:text-sm md:text-base whitespace-nowrap rounded-lg transition shadow-lg cursor-pointer"
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.5)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {t.bottom_button}
+            </motion.button>
+            <motion.button
+              className="bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-3 py-2 text-xs sm:text-sm md:text-base whitespace-nowrap rounded-lg transition shadow-lg cursor-pointer"
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.5)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {t.bottom_button2}
+            </motion.button>
           </motion.div>
         </div>
       </div>

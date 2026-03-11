@@ -7,8 +7,6 @@ import img2 from '../../assets/img.jfif';
 import img3 from '../../assets/cards-3.jpg';
 
 const Cards = ({ t }) => {
-  // ... data and animation definitions (unchanged)
-
   const cardsData = [
     {
       icon: <GiCrane className="text-4xl text-white bg-[#F97316] rounded-full p-1" />,
@@ -78,7 +76,6 @@ const Cards = ({ t }) => {
 
   return (
     <section className="w-full flex flex-col justify-center">
-      {/* Inner container with consistent vertical padding */}
       <div className="w-full flex flex-col gap-16 py-16 md:py-20">
         {/* First Row: Image Left, Cards Right */}
         <motion.div
@@ -105,7 +102,7 @@ const Cards = ({ t }) => {
             {cardsData.map((card, index) => (
               <motion.div
                 key={index}
-                className="bg-[#F2F2F2] shadow-lg rounded-xl p-5 flex flex-col justify-center break-words border-1 border-transparent"
+                className="bg-[#F2F2F2] shadow-lg rounded-xl p-5 flex flex-col justify-center items-center text-center md:items-start md:text-left break-words border-1 border-transparent"
                 variants={fadeUp}
                 whileHover={cardHover.whileHover}
               >
@@ -137,7 +134,7 @@ const Cards = ({ t }) => {
             {secondRowData.map((card, index) => (
               <motion.div
                 key={index}
-                className="bg-[#F2F2F2] shadow-lg rounded-xl p-5 flex flex-col justify-center break-words border-1 border-transparent"
+                className="bg-[#F2F2F2] shadow-lg rounded-xl p-5 flex flex-col justify-center items-center text-center md:items-start md:text-left break-words border-1 border-transparent"
                 variants={fadeUp}
                 whileHover={cardHover.whileHover}
               >
