@@ -5,7 +5,7 @@ import { GiCrane, GiDrill, GiBrickWall } from "react-icons/gi";
 import { FaHardHat, FaDraftingCompass, FaTools } from "react-icons/fa";
 import img from "../../assets/xlg (1).jfif";
 import PhoneInput from "../PhoneInputWrapper";
-import heroimg from "../../assets/hero-7.jpg";
+import heroimg from "../../assets/Pinterest.jfif";
 
 /* ================= CONTACT FORM ================= */
 const ContactForm = ({ t }) => {
@@ -155,13 +155,15 @@ const Hero = ({ language, t }) => {
         alt="Hero"
         className="absolute inset-0 w-full h-full object-cover opacity-100"
       />
-      <div className="absolute inset-0 bg-black/10"></div>
+      {/* Darker overlay for better text contrast */}
+      <div className="absolute inset-0 bg-black/50"></div>
 
       <div className="relative flex justify-center pt-28 md:pt-36 pb-12">
         <div className="w-[95%] max-w-6xl mx-auto space-y-6">
-          {/* TEXT */}
+          {/* TEXT with subtle shadow for readability */}
           <motion.div
             className="mt-3 text-white space-y-3"
+            style={{ textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}

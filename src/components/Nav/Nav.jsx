@@ -19,11 +19,18 @@ const Nav = ({ language, setLanguage, t }) => {
     kontakt: 'contact'    
   };
 
-  // Smooth scroll to section
+  // Smooth scroll to section with offset for fixed navbar
   const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const navbarHeight = 100; // Approx height of fixed navbar (including margin/padding)
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   }, []);
 
@@ -73,7 +80,7 @@ const Nav = ({ language, setLanguage, t }) => {
             <li
               key={item}
               onClick={() => handleNavClick(item)}
-              className="px-3 py-2 text-sm font-medium text-gray-200 hover:text-white rounded-lg hover:bg-white/10 transition-all duration-200 cursor-pointer"
+              className="px-3 py-2 text-sm font-medium text-gray-200 hover:text-white font-bold rounded-lg hover:bg-[#1a1a1a] transition-all duration-200 cursor-pointer"
             >
               {t[item]}
             </li>
@@ -93,7 +100,7 @@ const Nav = ({ language, setLanguage, t }) => {
 
           <button
             onClick={() => scrollToSection('contact')}
-            className="bg-[#F97316] hover:bg-[#EA580C] text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 transform hover:scale-[1.02] active:scale-[0.98]"
+            className="bg-[#F97316] hover:bg-[#EA580C] cursor-pointer text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 transform hover:scale-[1.02] active:scale-[0.98]"
           >
             {t.jetzt_kontakt}
           </button>
