@@ -1,9 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import reliefimg from "../../assets/relief img.png";
+import reliefimg from "../../assets/relief-img.jpg";
 
 const RELIEF = ({ t }) => {
-  // Animation variants
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -28,8 +27,9 @@ const RELIEF = ({ t }) => {
   ];
 
   return (
-    <section className="bg-black text-white w-full flex justify-center py-16 md:py-20">
-      <div className="w-[95%] max-w-6xl grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section className="bg-black text-white w-full flex justify-center">
+      {/* Inner container with consistent vertical padding */}
+      <div className="w-[95%] max-w-6xl mx-auto py-16 md:py-20 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
         {/* LEFT SIDE */}
         <motion.div
           initial="hidden"
@@ -38,7 +38,7 @@ const RELIEF = ({ t }) => {
           variants={staggerContainer}
         >
           <motion.p variants={fadeUp}>
-            <span className="bg-red-700 rounded px-4 py-2 text-white text-xs sm:text-sm md:text-base">
+            <span className="bg-[#F97316] rounded px-4 py-2 text-white text-xs sm:text-sm md:text-base">
               {t.relief_label}
             </span>
           </motion.p>
@@ -67,11 +67,9 @@ const RELIEF = ({ t }) => {
                 className="flex items-start gap-4"
                 variants={fadeUp}
               >
-                {/* Custom Red Check Circle */}
-                <div className="w-6 h-6 flex items-center justify-center rounded-full bg-red-600 text-white text-sm flex-shrink-0">
+                <div className="w-6 h-6 flex items-center justify-center rounded-full bg-[#F97316] text-white text-sm flex-shrink-0">
                   ✓
                 </div>
-
                 <p className="text-[#E0E0E0] text-sm sm:text-base">{item}</p>
               </motion.div>
             ))}
@@ -89,13 +87,7 @@ const RELIEF = ({ t }) => {
           <img
             src={reliefimg}
             alt="Relief"
-            className="w-full 
-                       h-[300px] 
-                       sm:h-[400px] 
-                       md:h-[500px] 
-                       lg:h-[600px] 
-                       object-cover 
-                       rounded-lg"
+            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover rounded-lg"
           />
         </motion.div>
       </div>

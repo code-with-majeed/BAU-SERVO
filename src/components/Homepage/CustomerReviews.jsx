@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 // Star rating component (unchanged)
 const StarRating = ({ stars }) => (
-  <div className="flex text-red-600 mb-2 justify-center md:justify-start">
+  <div className="flex text-[#F97316] mb-2 justify-center md:justify-start">
     {Array.from({ length: 5 }, (_, i) => (
       <svg
         key={i}
@@ -18,7 +18,7 @@ const StarRating = ({ stars }) => (
 );
 
 const CustomerReviews = ({ t }) => {
-  // Review data with translated text and role
+  // Review data with translated text and role (from translations)
   const reviews = [
     {
       stars: 5,
@@ -81,9 +81,21 @@ const CustomerReviews = ({ t }) => {
     },
   };
 
+  // Hover animation for each review card
+  const cardHover = {
+    whileHover: {
+      scale: 1.02,
+      y: -4,
+      boxShadow: "0 20px 30px -10px rgba(249, 115, 22, 0.3)",
+      borderColor: "#F97316",
+      transition: { type: "spring", stiffness: 300 },
+    },
+  };
+
   return (
-    <section className="w-full flex justify-center py-16 bg-gray-50">
-      <div className="w-[95%] max-w-6xl">
+    <section className="w-full flex justify-center text-white bg-[#111827]">
+      {/* Inner container with consistent vertical padding */}
+      <div className="w-[95%] max-w-6xl mx-auto py-16 md:py-20">
         {/* Heading */}
         <motion.div
           className="flex flex-col items-center mb-16 w-full max-w-4xl mx-auto"
@@ -99,14 +111,14 @@ const CustomerReviews = ({ t }) => {
           >
             {t.reviews_heading_line1}
             <svg
-              className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-[68%] h-2"
+              className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-[60%] h-2"
               viewBox="0 0 200 10"
               preserveAspectRatio="none"
               fill="transparent"
             >
               <path
                 d="M0,5 C100,2 300,2 400,5"
-                stroke="red"
+                stroke="#F97316"
                 strokeWidth="4"
                 strokeLinecap="round"
               />
@@ -127,7 +139,7 @@ const CustomerReviews = ({ t }) => {
             >
               <path
                 d="M0,5 C100,2 300,2 400,5"
-                stroke="red"
+                stroke="#F97316"
                 strokeWidth="4"
                 strokeLinecap="round"
               />
@@ -137,7 +149,7 @@ const CustomerReviews = ({ t }) => {
 
         {/* Description */}
         <motion.p
-          className="text-center text-gray-600 mb-10 text-sm sm:text-base"
+          className="text-center text-gray-400 mb-10 text-sm sm:text-base"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -158,11 +170,12 @@ const CustomerReviews = ({ t }) => {
           {reviews.map((review, index) => (
             <motion.div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md flex flex-col h-full"
+              className="bg-[#374151] p-6 rounded-lg shadow-md flex flex-col h-full border border-transparent"
               variants={fadeUp}
+              whileHover={cardHover.whileHover}
             >
               <StarRating stars={review.stars} />
-              <p className="text-gray-800 mb-4 flex-1 text-center md:text-left">{review.text}</p>
+              <p className="text-gray-200 mb-4 flex-1 text-center md:text-left">{review.text}</p>
 
               {/* Customer name + profile image */}
               <div className="flex flex-col md:flex-row items-center md:items-start mt-4">
@@ -172,8 +185,8 @@ const CustomerReviews = ({ t }) => {
                   className="w-10 h-10 rounded-full mb-2 md:mb-0 md:mr-3 object-cover"
                 />
                 <div className="text-center md:text-left">
-                  <p className="font-semibold">{review.name}</p>
-                  <p className="text-gray-500 text-sm">{review.role}</p>
+                  <p className="font-semibold text-white">{review.name}</p>
+                  <p className="text-gray-400 text-sm">{review.role}</p>
                 </div>
               </div>
             </motion.div>

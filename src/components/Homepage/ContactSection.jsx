@@ -7,7 +7,6 @@ import PhoneInput from "../PhoneInputWrapper";
 export default function ContactSection({ t }) {
   const [phone, setPhone] = useState("");
 
-  // Animation variants
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -35,14 +34,14 @@ export default function ContactSection({ t }) {
   return (
     <section
       id="contact"
-      className="relative bg-cover bg-center py-16 sm:py-20"
+      className="relative bg-cover bg-center"
       style={{ backgroundImage: `url(${bgimg})` }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/60"></div>
 
-      {/* Container SAME as Process */}
-      <div className="relative max-w-6xl mx-auto">
+      {/* Inner container with consistent vertical padding */}
+      <div className="relative max-w-6xl mx-auto px-4 py-16 md:py-20">
         <motion.div
           className="bg-gray-100 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16"
           initial="hidden"
@@ -72,7 +71,7 @@ export default function ContactSection({ t }) {
                   className="flex items-start gap-4"
                   variants={fadeUp}
                 >
-                  <div className="w-6 h-6 flex items-center justify-center rounded-full bg-red-600 text-white text-sm">
+                  <div className="w-6 h-6 flex items-center justify-center rounded-full bg-[#F97316] text-white text-sm">
                     ✓
                   </div>
                   <span className="text-gray-800">{item}</span>
@@ -136,7 +135,7 @@ export default function ContactSection({ t }) {
 
             <motion.button
               variants={fadeUp}
-              className="mt-6 w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 rounded-lg transition"
+              className="mt-6 w-full bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold py-4 rounded-lg transition cursor-pointer"
             >
               {t.contact_button}
             </motion.button>

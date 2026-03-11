@@ -1,12 +1,13 @@
+// Hero.jsx (unchanged, already uses t)
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { TbLassoPolygon } from "react-icons/tb";
-import { MdBrowserNotSupported } from "react-icons/md";
-import { IoMapOutline } from "react-icons/io5";
-import img from "../../assets/xlg.jfif";
+import { GiCrane, GiDrill, GiBrickWall } from "react-icons/gi";
+import { FaHardHat, FaDraftingCompass, FaTools } from "react-icons/fa";
+import img from "../../assets/xlg (1).jfif";
 import PhoneInput from "../PhoneInputWrapper";
+import heroimg from "../../assets/hero-7.jpg";
 
-/* ================= CONTACT FORM (now receives t) ================= */
+/* ================= CONTACT FORM ================= */
 const ContactForm = ({ t }) => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -40,7 +41,6 @@ const ContactForm = ({ t }) => {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ staggerChildren: 0.1, delayChildren: 0.2 }}
     >
-      {/* Names */}
       <motion.div className="flex flex-col md:flex-row gap-4" variants={formVariants}>
         <input
           name="firstName"
@@ -48,7 +48,7 @@ const ContactForm = ({ t }) => {
           value={formData.firstName}
           onChange={handleChange}
           className="flex-1 border-2 bg-white border-gray-300 rounded-lg px-4 py-3 focus:border-red-600 outline-none"
-          required
+          
         />
         <input
           name="lastName"
@@ -56,11 +56,10 @@ const ContactForm = ({ t }) => {
           value={formData.lastName}
           onChange={handleChange}
           className="flex-1 border-2 bg-white border-gray-300 rounded-lg px-4 py-3 focus:border-red-600 outline-none"
-          required
+          
         />
       </motion.div>
 
-      {/* Email */}
       <motion.div variants={formVariants}>
         <label className="block text-sm font-medium text-gray-700 mb-1">{t.email_label}</label>
         <input
@@ -74,11 +73,10 @@ const ContactForm = ({ t }) => {
         />
       </motion.div>
 
-      {/* Phone */}
       <motion.div className="w-full" variants={formVariants}>
         <label className="block text-sm font-medium text-gray-700 mb-2">{t.phone_label}</label>
         <PhoneInput
-          country="de"               // keep as "de" or make dynamic if needed
+          country="de"
           enableSearch
           value={formData.phone}
           onChange={(phone) => setFormData((prev) => ({ ...prev, phone }))}
@@ -89,7 +87,6 @@ const ContactForm = ({ t }) => {
         />
       </motion.div>
 
-      {/* Service */}
       <motion.select
         name="service"
         value={formData.service}
@@ -108,8 +105,10 @@ const ContactForm = ({ t }) => {
 
       <motion.button
         type="submit"
-        className="w-full bg-[#D81A1A] hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition"
+        className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold py-3 rounded-lg transition"
         variants={formVariants}
+        whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(249, 115, 22, 0.4)" }}
+        whileTap={{ scale: 0.98 }}
       >
         {t.form_button}
       </motion.button>
@@ -123,7 +122,7 @@ const ContactForm = ({ t }) => {
   );
 };
 
-/* ================= HERO (receives language and t) ================= */
+/* ================= HERO ================= */
 const Hero = ({ language, t }) => {
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -141,34 +140,38 @@ const Hero = ({ language, t }) => {
     },
   };
 
+  const featureHover = {
+    whileHover: {
+      scale: 1.02,
+      boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.2)",
+      transition: { type: "spring", stiffness: 300 },
+    },
+  };
+
   return (
     <div className="relative w-full min-h-[900px] md:min-h-[1050px] overflow-hidden">
-      {/* Background Image */}
       <motion.img
-        src="https://onecdn.io/media/9a3d1d24-411c-4c03-95ee-824b3e575e28/lg2x"
+        src={heroimg}
         alt="Hero"
-        className="absolute inset-0 w-full h-full object-cover opacity-120"
+        className="absolute inset-0 w-full h-full object-cover opacity-100"
       />
       <div className="absolute inset-0 bg-black/10"></div>
 
-      <div className="relative flex justify-center pt-28 md:pt-32 pb-20">
-        <div className="w-[95%] max-w-6xl mx-auto space-y-8">
+      <div className="relative flex justify-center pt-28 md:pt-36 pb-12">
+        <div className="w-[95%] max-w-6xl mx-auto space-y-6">
           {/* TEXT */}
           <motion.div
-            className="mt-7 text-white space-y-5"
+            className="mt-3 text-white space-y-3"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={textStagger}
           >
             <motion.h1 className="text-3xl md:text-5xl font-extrabold leading-snug" variants={fadeUp}>
-              <span className="bg-red-700/80 px-2 py-1 rounded">{t.hero_title_line1}</span>
+              <span className="bg-[#F97316]/80 px-2 py-1 rounded">{t.hero_title_line1}</span>
               <br />
-              <span className="bg-red-700/80 px-2 py-1 rounded">{t.hero_title_line2}</span>
+              <span className="bg-[#F97316]/80 px-2 py-1 rounded">{t.hero_title_line2}</span>
               <br />
-              <span className="bg-red-700/80 px-2 py-1 rounded">{t.hero_title_line3}</span>
-              <br />
-              <span className="bg-red-700/80 px-2 py-1 rounded">{t.hero_title_line4}</span>
             </motion.h1>
 
             <motion.p className="text-lg md:text-2xl font-extrabold" variants={fadeUp}>
@@ -189,27 +192,37 @@ const Hero = ({ language, t }) => {
               ))}
             </motion.p>
 
-            {/* Features */}
-            <motion.div className="space-y-3 pt-2" variants={fadeUp}>
-              <div className="flex gap-4 items-start">
-                <TbLassoPolygon className="text-2xl mt-1" />
-                <h2 className="font-bold text-lg md:text-xl">{t.feature1}</h2>
-              </div>
-              <div className="flex gap-4 items-start">
-                <MdBrowserNotSupported className="text-2xl mt-1" />
-                <h2 className="font-bold text-lg md:text-xl">{t.feature2}</h2>
-              </div>
-              <div className="flex gap-4 items-start">
-                <IoMapOutline className="text-2xl mt-1" />
-                <h2 className="font-semibold text-base md:text-lg">{t.feature3}</h2>
-              </div>
+            {/* Features – more compact */}
+            <motion.div className="space-y-2 pt-1" variants={fadeUp}>
+              <motion.div
+                className="flex gap-4 items-start p-2 rounded-lg cursor-default"
+                variants={featureHover}
+                whileHover="whileHover"
+              >
+                <GiCrane className="text-2xl mt-1 text-[#F97316]" />
+                <h2 className="font-bold text-lg md:text-xl leading-tight">{t.feature1}</h2>
+              </motion.div>
+              <motion.div
+                className="flex gap-4 items-start p-2 rounded-lg cursor-default"
+                variants={featureHover}
+                whileHover="whileHover"
+              >
+                <FaHardHat className="text-2xl mt-1 text-[#F97316]" />
+                <h2 className="font-bold text-lg md:text-xl leading-tight">{t.feature2}</h2>
+              </motion.div>
+              <motion.div
+                className="flex gap-4 items-start p-2 rounded-lg cursor-default"
+                variants={featureHover}
+                whileHover="whileHover"
+              >
+                <FaDraftingCompass className="text-2xl mt-1 text-[#F97316]" />
+                <h2 className="font-semibold text-base md:text-lg leading-tight">{t.feature3}</h2>
+              </motion.div>
             </motion.div>
           </motion.div>
 
-          {/* FORM – pass t down */}
           <ContactForm t={t} />
 
-          {/* Bottom Button */}
           <motion.div
             className="flex justify-center"
             initial={{ opacity: 0, y: 20 }}
@@ -217,9 +230,22 @@ const Hero = ({ language, t }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <button className="bg-[#D81A1A] text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition shadow-lg">
-              {t.bottom_button}
-            </button>
+            <div className="flex gap-x-4">
+              <motion.button
+                className="bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-2 py-2 sm:px-6 sm:py-3 rounded-lg transition shadow-lg cursor-pointer"
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.5)" }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {t.bottom_button}
+              </motion.button>
+              <motion.button
+                className="bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-4 py-3 sm:px-6 sm:py-3 rounded-lg transition shadow-lg cursor-pointer"
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.5)" }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {t.bottom_button2}
+              </motion.button>
+            </div>
           </motion.div>
         </div>
       </div>

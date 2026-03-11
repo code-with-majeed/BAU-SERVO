@@ -1,7 +1,9 @@
+// Process.jsx (updated with translations)
 import React from "react";
 import { motion } from "framer-motion";
 
 const Process = ({ t }) => {
+  // Steps from translations
   const steps = [
     t.process_step1,
     t.process_step2,
@@ -27,6 +29,12 @@ const Process = ({ t }) => {
     },
   };
 
+  const hoverEffect = {
+    scale: 1.02,
+    boxShadow: "0 20px 40px -15px rgba(0,0,0,0.4)",
+    transition: { type: "spring", stiffness: 300, damping: 20 },
+  };
+
   return (
     <section id="process" className="bg-black text-white py-16 sm:py-20 px-4">
       <div className="max-w-6xl mx-auto">
@@ -40,7 +48,7 @@ const Process = ({ t }) => {
           >
             <motion.span
               variants={fadeUp}
-              className="bg-red-700 rounded px-4 py-2 uppercase text-xs sm:text-sm tracking-wide"
+              className="bg-[#F97316] rounded px-4 py-2 uppercase text-xs sm:text-sm tracking-wide"
             >
               {t.process_label}
             </motion.span>
@@ -69,18 +77,18 @@ const Process = ({ t }) => {
             variants={staggerContainer}
           >
             {steps.map((step, index) => (
-              <motion.div key={index} variants={fadeUp}>
-                {/* Schritt Badge */}
+              <motion.div
+                key={index}
+                variants={fadeUp}
+                whileHover={hoverEffect}
+                className="rounded-lg transition-all cursor-default"
+              >
                 <span className="bg-[#262626] rounded px-4 py-1 text-xs sm:text-sm uppercase font-light tracking-wide">
                   {t.process_step_prefix} {index + 1}
                 </span>
-
-                {/* Heading */}
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mt-4 leading-snug">
                   {step}
                 </h3>
-
-                {/* Divider */}
                 {index !== steps.length - 1 && (
                   <hr className="border-gray-800 mt-6" />
                 )}

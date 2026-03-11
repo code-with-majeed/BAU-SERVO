@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import logo from "../../assets/logo.jpeg";
+import React, { useState, useCallback } from "react";
+import logo from "../../assets/logo-1-removebg-preview.png";
 import { LuPhone } from "react-icons/lu";
 import { HiOutlineMenu, HiOutlineX, HiOutlineGlobeAlt } from "react-icons/hi";
 import { IoChevronDown } from "react-icons/io5";
@@ -8,6 +8,39 @@ const Nav = ({ language, setLanguage, t }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [desktopLangOpen, setDesktopLangOpen] = useState(false);
   const [mobileLangOpen, setMobileLangOpen] = useState(false);
+  const [showCopyMessage, setShowCopyMessage] = useState(false);
+
+  // Map menu keys to section IDs
+  const sectionMap = {
+    leistungen: 'services',
+    prozess: 'process', 
+    projekt: 'projects',
+    faq: 'faq',        
+    kontakt: 'contact'    
+  };
+
+  // Smooth scroll to section
+  const scrollToSection = useCallback((sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
+  // Handle menu item click
+  const handleNavClick = useCallback((item) => {
+    const sectionId = sectionMap[item];
+    if (sectionId) {
+      scrollToSection(sectionId);
+    }
+    // Close mobile menu if open
+    if (isOpen) setIsOpen(false);
+  }, [isOpen, scrollToSection]);
+
+  // Handle logo click – scroll to top
+  const handleLogoClick = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const changeLanguage = (lang) => {
     setLanguage(lang);
@@ -15,141 +48,179 @@ const Nav = ({ language, setLanguage, t }) => {
     setMobileLangOpen(false);
   };
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    setIsOpen(false); // Close mobile menu after clicking
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(t.phone).then(() => {
+      setShowCopyMessage(true);
+      setTimeout(() => setShowCopyMessage(false), 2000);
+    }).catch(err => console.error('Copy failed:', err));
   };
 
   return (
-    <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 w-[95%] max-w-6xl z-20 bg-white shadow-lg rounded-xl">
-      <div className="px-6 flex items-center justify-between">
-        {/* Left: Logo */}
-        <div className="flex-shrink-0">
-          <img src={logo} alt="Logo" className="h-16 w-16 md:h-20 md:w-20 cursor-pointer" />
+    <nav className="fixed top-5 left-1/2 transform -translate-x-1/2 w-[95%] max-w-6xl z-50 bg-[#111111] text-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/5 backdrop-blur-sm bg-opacity-95">
+      <div className="px-4 sm:px-6 py-2 flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex-shrink-0" onClick={handleLogoClick}>
+          <img
+            src={logo}
+            alt="Company Logo"
+            className="h-14 w-14 md:h-16 md:w-16 object-contain cursor-pointer hover:opacity-90 transition-opacity"
+          />
         </div>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8">
-          <li className="cursor-pointer font-extrabold hover:text-[#D81A1A]" onClick={() => scrollToSection('services')}>{t.leistungen}</li>
-          <li className="cursor-pointer font-extrabold hover:text-[#D81A1A]" onClick={() => scrollToSection('process')}>{t.prozess}</li>
-          <li className="cursor-pointer font-extrabold hover:text-[#D81A1A]" onClick={() => scrollToSection('faq')}>{t.faq}</li>
-          <li className="cursor-pointer font-extrabold hover:text-[#D81A1A]" onClick={() => scrollToSection('contact')}>{t.kontakt}</li>
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex items-center space-x-1 lg:space-x-2">
+          {["leistungen", "prozess", "projekt", "faq", "kontakt"].map((item) => (
+            <li
+              key={item}
+              onClick={() => handleNavClick(item)}
+              className="px-3 py-2 text-sm font-medium text-gray-200 hover:text-white rounded-lg hover:bg-white/10 transition-all duration-200 cursor-pointer"
+            >
+              {t[item]}
+            </li>
+          ))}
         </ul>
 
-        {/* Desktop Contact Info + Language Dropdown */}
-        <div className="hidden md:flex items-center space-x-4 relative">
-          <span className="font-medium">
-            <LuPhone className="inline mr-2" /> {t.phone}
-          </span>
-          <button className="bg-[#D81A1A] font-semibold text-white px-5 py-3 cursor-pointer rounded transition hover:bg-red-700">
+        {/* Desktop Right Section */}
+        <div className="hidden md:flex items-center space-x-3">
+          <a
+            href={`tel:${t.phone}`}
+            onClick={handleCopyPhone}
+            className="flex items-center space-x-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
+          >
+            <LuPhone className="text-[#F97316] text-lg" />
+            <span>{t.phone}</span>
+          </a>
+
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="bg-[#F97316] hover:bg-[#EA580C] text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 transform hover:scale-[1.02] active:scale-[0.98]"
+          >
             {t.jetzt_kontakt}
           </button>
 
-          {/* Professional Desktop Language Selector */}
+          {/* Language Selector */}
           <div className="relative">
             <button
               onClick={() => setDesktopLangOpen(!desktopLangOpen)}
-              className="flex items-center space-x-1 px-3 py-2 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none"
+              className="flex items-center space-x-1 cursor-pointer px-3 py-2 rounded-lg bg-white/10 transition-colors duration-200"
             >
-              <HiOutlineGlobeAlt className="h-5 w-5 text-gray-600" />
-              <span className="font-medium text-sm">{language.toUpperCase()}</span>
+              <HiOutlineGlobeAlt className="h-5 w-5 text-[#F97316]" />
+              <span className="text-sm font-medium">{language.toUpperCase()}</span>
               <IoChevronDown
-                className={`h-4 w-4 text-gray-600 transition-transform duration-200 ${
+                className={`h-4 w-4 text-[#F97316] transition-transform duration-200 ${
                   desktopLangOpen ? "rotate-180" : ""
                 }`}
               />
             </button>
 
             {desktopLangOpen && (
-              <div className="absolute right-0 mt-2 w-24 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1 animate-fadeIn">
-                <button
-                  onClick={() => changeLanguage("en")}
-                  className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                    language === "en" ? "font-bold text-[#D81A1A]" : "text-gray-700"
-                  }`}
-                >
-                  EN
-                </button>
-                <button
-                  onClick={() => changeLanguage("de")}
-                  className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                    language === "de" ? "font-bold text-[#D81A1A]" : "text-gray-700"
-                  }`}
-                >
-                  DE
-                </button>
+              <div className="absolute right-0 mt-2 w-24 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl py-1 z-50 animate-fadeIn">
+                {["en", "de"].map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => changeLanguage(lang)}
+                    className={`block w-full text-left px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${
+                      language === lang ? "text-[#F97316] font-semibold" : "text-gray-300"
+                    }`}
+                  >
+                    {lang.toUpperCase()}
+                  </button>
+                ))}
               </div>
             )}
           </div>
         </div>
 
-        {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center">
-          <button onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <HiOutlineX className="h-8 w-8" /> : <HiOutlineMenu className="h-8 w-8" />}
-          </button>
-        </div>
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+        >
+          {isOpen ? (
+            <HiOutlineX className="h-6 w-6 text-[#F97316]" />
+          ) : (
+            <HiOutlineMenu className="h-6 w-6 text-[#F97316]" />
+          )}
+        </button>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden px-6 pb-4 space-y-4 bg-white rounded-b-xl shadow-lg">
-          <ul className="flex flex-col space-y-4">
-            <li className="cursor-pointer font-medium hover:text-[#D81A1A]" onClick={() => scrollToSection('services')}>{t.leistungen}</li>
-            <li className="cursor-pointer font-medium hover:text-[#D81A1A]" onClick={() => scrollToSection('process')}>{t.prozess}</li>
-            <li className="cursor-pointer font-medium hover:text-[#D81A1A]" onClick={() => scrollToSection('faq')}>{t.faq}</li>
-            <li className="cursor-pointer font-medium hover:text-[#D81A1A]" onClick={() => scrollToSection('contact')}>{t.kontakt}</li>
+        <div className="md:hidden px-4 pb-5 pt-2 space-y-4 bg-[#111111] border-t border-white/10 rounded-b-2xl">
+          <ul className="flex flex-col space-y-2">
+            {["leistungen", "prozess", "projekt", "faq", "kontakt"].map((item) => (
+              <li
+                key={item}
+                onClick={() => handleNavClick(item)}
+                className="px-4 py-3 text-base font-medium text-gray-200 hover:text-white rounded-xl hover:bg-white/10 transition-all cursor-pointer"
+              >
+                {t[item]}
+              </li>
+            ))}
           </ul>
-          <div className="flex flex-col space-y-2 mt-2">
-            <span className="font-medium">
-              <LuPhone className="inline mr-2" /> {t.phone}
-            </span>
-            <button className="bg-[#D81A1A] font-semibold text-white px-5 py-3 rounded transition hover:bg-red-700">
+
+          <div className="space-y-3 pt-2">
+            <a
+              href={`tel:${t.phone}`}
+              onClick={handleCopyPhone}
+              className="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white rounded-xl hover:bg-white/10 transition-colors"
+            >
+              <LuPhone className="text-[#F97316] text-xl" />
+              <span className="text-base font-medium">{t.phone}</span>
+            </a>
+
+            <button
+              onClick={() => {
+                scrollToSection('contact');
+                setIsOpen(false);
+              }}
+              className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-orange-500/20"
+            >
               {t.jetzt_kontakt}
             </button>
 
             {/* Mobile Language Selector */}
-            <div className="relative mt-2">
+            <div className="relative">
               <button
                 onClick={() => setMobileLangOpen(!mobileLangOpen)}
-                className="w-full flex items-center justify-between px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                className="w-full flex items-center justify-between px-4 py-3 border border-white/10 rounded-xl hover:bg-white/10 transition-colors"
               >
-                <div className="flex items-center space-x-2">
-                  <HiOutlineGlobeAlt className="h-5 w-5 text-gray-600" />
+                <div className="flex items-center space-x-3">
+                  <HiOutlineGlobeAlt className="h-5 w-5 text-[#F97316]" />
                   <span className="font-medium">{language.toUpperCase()}</span>
                 </div>
                 <IoChevronDown
-                  className={`h-4 w-4 text-gray-600 transition-transform duration-200 ${
+                  className={`h-4 w-4 text-[#F97316] transition-transform duration-200 ${
                     mobileLangOpen ? "rotate-180" : ""
                   }`}
                 />
               </button>
 
               {mobileLangOpen && (
-                <div className="absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1 animate-fadeIn">
-                  <button
-                    onClick={() => changeLanguage("en")}
-                    className={`block w-full text-left px-4 py-2 hover:bg-gray-50 transition-colors ${
-                      language === "en" ? "font-bold text-[#D81A1A]" : "text-gray-700"
-                    }`}
-                  >
-                    EN
-                  </button>
-                  <button
-                    onClick={() => changeLanguage("de")}
-                    className={`block w-full text-left px-4 py-2 hover:bg-gray-50 transition-colors ${
-                      language === "de" ? "font-bold text-[#D81A1A]" : "text-gray-700"
-                    }`}
-                  >
-                    DE
-                  </button>
+                <div className="absolute left-0 right-0 mt-2 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl py-1 z-50 animate-fadeIn">
+                  {["en", "de"].map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => changeLanguage(lang)}
+                      className={`block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors ${
+                        language === lang ? "text-[#F97316] font-semibold" : "text-gray-300"
+                      }`}
+                    >
+                      {lang.toUpperCase()}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Copy confirmation message */}
+      {showCopyMessage && (
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg border border-white/10 z-50 flex items-center space-x-2">
+          <span className="text-[#F97316]">✓</span>
+          <span>Phone number copied!</span>
         </div>
       )}
     </nav>
