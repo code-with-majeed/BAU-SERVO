@@ -195,7 +195,7 @@ const ProjectsSection = ({ t }) => {
                   onClick={() => openModal(project)}
                   className="mt-3 bg-[#F97316] hover:bg-[#EA580C] cursor-pointer text-white px-4 py-2 rounded-lg font-semibold shadow transition-colors"
                 >
-                  {t['view_project']}  {/* ← now using bracket notation */}
+                  {t['view_project']}
                 </button>
               </div>
             </motion.div>
@@ -220,7 +220,7 @@ const ProjectsSection = ({ t }) => {
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
             >
-              <div className="bg-gray-800 rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="bg-gray-800 rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-800 [&::-webkit-scrollbar-thumb]:bg-gray-700 [&::-webkit-scrollbar-thumb]:rounded-full [scrollbar-width:thin] [scrollbar-color:#4B5563_#1F2937]">
                 <div className="relative">
                   <button
                     onClick={closeModal}
