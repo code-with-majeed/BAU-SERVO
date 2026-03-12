@@ -166,10 +166,10 @@ const translations = {
     footer_privacy: "Privacy Policy",
     footer_phone: "+49 1520 2025 811",
     footer_address: "Feldbergstraße 56\n68163 Mannheim",
-    footer_email: "info@aurevo-construction.com",
-    footer_copyright: "© 2026 Aurevo Construction. All rights reserved",
+    footer_email: "info@bauservo-construction.com",
+    footer_copyright: "© 2026 BAU-SERVO Construction. All rights reserved",
     footer_disclaimer:
-      "This website is not affiliated with Facebook, Google or Meta Platforms, Inc. Facebook and Google are registered trademarks of their respective owners. We use cookies and remarketing pixels to display relevant advertising and improve our website. Use of this website is at your own risk.",
+      "This website belongs to a construction company and provides information about our building and construction services. We may use cookies to improve website performance and user experience. Use of this website is at your own risk.",
 
     // ========== PROJECTS SECTION ==========
     projects_heading: "Our Completed Works",
@@ -423,10 +423,10 @@ const translations = {
     footer_privacy: "Datenschutzrichtlinie",
     footer_phone: "+49 1520 2025 811",
     footer_address: "Feldbergstraße 56\n68163 Mannheim",
-    footer_email: "info@aurevo-construction.de",
-    footer_copyright: "© 2026 Aurevo Construction. Alle Rechte vorbehalten",
+    footer_email: "info@bauservo-construction.de",
+    footer_copyright: "© 2026 BAU-SERVO Construction. Alle Rechte vorbehalten",
     footer_disclaimer:
-      "Diese Website steht in keiner Verbindung zu Facebook, Google oder Meta Platforms, Inc. Facebook und Google sind eingetragene Marken ihrer jeweiligen Eigentümer. Wir verwenden Cookies und Remarketing-Pixel, um relevante Werbung anzuzeigen und unsere Website zu verbessern. Die Nutzung dieser Website erfolgt auf eigenes Risiko.",
+      "Diese Website gehört zu einem Bauunternehmen und bietet Informationen über unsere Bau- und Konstruktionsdienstleistungen. Wir verwenden Cookies, um die Leistung der Website und die Benutzererfahrung zu verbessern. Die Nutzung dieser Website erfolgt auf eigenes Risiko.",
 
     // ========== PROJECTS SECTION ==========
     projects_heading: "Unsere abgeschlossenen Projekte",

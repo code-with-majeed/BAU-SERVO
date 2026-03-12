@@ -68,6 +68,7 @@ const Footer = ({ t }) => {
                 {[
                   { key: "leistungen", id: "services" },
                   { key: "prozess", id: "process" },
+                  { key: "projekt", id: "projects" },    // ✅ Fixed key from "projekts" to "projekt"
                   { key: "faq", id: "faq" },
                   { key: "kontakt", id: "contact" }
                 ].map((item) => (
