@@ -44,7 +44,7 @@ const Chalenge = ({ t }) => {
   return (
     <section className="w-full flex justify-center bg-[#1F2937] text-[#FFFFFF]">
       {/* Inner container with consistent vertical padding */}
-      <div className="w-full max-w-6xl mx-auto px-4 py-16 md:py-20">
+      <div className="w-full max-w-6xl mx-auto  py-16 md:py-20">
         <motion.p
           initial="hidden"
           whileInView="visible"
