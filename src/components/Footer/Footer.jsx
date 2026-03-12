@@ -68,7 +68,7 @@ const Footer = ({ t }) => {
                 {[
                   { key: "leistungen", id: "services" },
                   { key: "prozess", id: "process" },
-                  { key: "projekt", id: "projects" },    // ✅ Fixed key from "projekts" to "projekt"
+                  { key: "projekt", id: "projects" },  
                   { key: "faq", id: "faq" },
                   { key: "kontakt", id: "contact" }
                 ].map((item) => (
@@ -78,7 +78,7 @@ const Footer = ({ t }) => {
                       className="text-gray-300 hover:text-[#F97316] transition-colors duration-200 relative group"
                     >
                       {t[item.key]}
-                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#F97316] transition-all duration-300 group-hover:w-full" />
+                      <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-[#F97316] transform scale-x-0 origin-center transition-transform duration-200 group-hover:scale-x-100 rounded-full" />
                     </a>
                   </li>
                 ))}
@@ -98,7 +98,7 @@ const Footer = ({ t }) => {
                       className="text-gray-300 hover:text-[#F97316] transition-colors duration-200 relative group"
                     >
                       {t[key]}
-                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#F97316] transition-all duration-300 group-hover:w-full" />
+                      <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-[#F97316] transform scale-x-0 origin-center transition-transform duration-200 group-hover:scale-x-100 rounded-full" />
                     </a>
                   </li>
                 ))}
